@@ -1,0 +1,5 @@
+.env
+.direnv
+dist-newstyle
+result*
+.stack-work

@@ -1,0 +1,37 @@
+cabal-version:       2.4
+name:                common
+version:             0.1.0.0
+license:             AGPL-3.0-only
+author:              Dan Dart
+maintainer:          git@dandart.co.uk
+-- copyright:
+-- category:
+build-type:          Simple
+extra-source-files:  CHANGELOG.md, README.md
+
+library 
+  -- exposed-modules:     
+ -- other-extensions:
+  build-depends:       base >= 4.12 && < 5
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  default-extensions:  OverloadedStrings, UnicodeSyntax
+  ghc-options:         -Wall -Werror
+
+
+test-suite item-manager-test
+  hs-source-dirs:      src, test
+  type:                exitcode-stdio-1.0
+  default-language:    Haskell2010
+  main-is:             Spec.hs
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       
+    base >= 4.7 && < 5
+    , common
+    , hspec
+    , hspec-core
+    , hspec-expectations
+    , HUnit
+    , QuickCheck
+  other-modules:
+    MainSpec
