@@ -45,7 +45,7 @@ putItemAPI itemId item = do
     items <- liftIO (query conn' "SELECT * from items WHERE id = ? LIMIT 1" (Only itemId) :: IO [Item])
     case items of
         [item] -> do
-            liftIO $ execute conn' "UPDATE items SET name = ? WHERE id = ?" (name item, itemId]
+            liftIO $ execute conn' "UPDATE items SET name = ? WHERE id = ?" (name item, itemId)
             pure item
         _ -> throwError $ err404 {
             errBody = "Specified item not found"
