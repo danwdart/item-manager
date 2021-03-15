@@ -8,7 +8,6 @@ module Server.Items where
 import           Control.Applicative
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
-import           Data.CSV.Import
 import           Data.Text                  (Text)
 import           Database.SQLite.Simple
 import           Servant

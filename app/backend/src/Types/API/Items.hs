@@ -4,7 +4,6 @@
 
 module Types.API.Items where
 
-import qualified Data.Item    as ItemCSV
 import           Servant.API
 import           Types.Item
 

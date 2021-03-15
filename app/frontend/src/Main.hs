@@ -15,7 +15,6 @@ import qualified Data.Set as S
 import Data.Text (Text)
 import qualified Data.Text as T
 import Reflex.Dom
-import Service.ItemCSV
 import Service.Category
 import Types.Category
 import UI.Bootstrap.Button

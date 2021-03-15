@@ -5,7 +5,6 @@
 module Main where
 
 -- import           Data.Aeson
--- import           Data.CSV.Import
 import           Control.Applicative
 import           Control.Monad.Trans.Reader
 import           Data.Proxy

@@ -13,7 +13,7 @@ data-dir:            data
 
 executable frontend
   main-is:             Main.hs
-  other-modules:       Service.Item, Service.ItemCSV
+  other-modules:       Service.Item
   -- other-extensions:
   build-depends:       base >=4.12 && <4.16, aeson, bytestring, common, containers, reflex-dom, text
   hs-source-dirs:      src
