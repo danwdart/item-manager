@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "haskell.haskell",
+        "justusadam.language-haskell",
+        "ndmitchell.haskell-ghcid",
+        "hoovercj.haskell-linter",
+        "dramforever.vscode-ghc-simple",
+        "vigoo.stylish-haskell",
+        "arrterian.nix-env-selector",
+        "rubymaniac.vscode-direnv"
+    ]
+  }
