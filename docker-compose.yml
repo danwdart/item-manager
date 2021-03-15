@@ -1,8 +1,19 @@
-version: 3.8
+version: "3.8"
+
 services:
-  frontend:
-    image: dandart/item-manager-frontend
+
   backend:
     image: dandart/item-manager-backend
-  db:
-    image: postgres
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - 8081:8081
+
+  frontend:
+    image: dandart/item-manager-frontend
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - 8080:8080

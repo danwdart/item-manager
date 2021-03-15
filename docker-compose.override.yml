@@ -1,0 +1,15 @@
+services:
+
+  backend:
+    image: dandart/item-manager-backend:dev
+    build:
+      dockerfile: docker/backend/dev.Dockerfile
+    volumes:
+      - ~/.ssh:/root/.ssh
+
+  frontend:
+    image: dandart/item-manager-frontend:dev
+    build:
+      dockerfile: docker/frontend/dev.Dockerfile
+    volumes:
+      - ~/.ssh:/root/.ssh
