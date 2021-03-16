@@ -12,12 +12,12 @@ import           Types.Env
 getAll ∷ MonadIO m ⇒ ReaderT Env m [Category]
 getAll = do
     conn' <- asks conn
-    liftIO $ query_ conn' "SELECT * from categories"
+    liftIO $ query_ conn' "SELECT id, name from categories"
 
 get ∷ MonadIO m ⇒ CategoryId → ReaderT Env m (Maybe Category)
 get categoryId = do
     conn' <- asks conn
-    categories <- liftIO (query conn' "SELECT * from categories WHERE id = ? LIMIT 1" (Only categoryId) :: IO [Category])
+    categories <- liftIO (query conn' "SELECT id, name from categories WHERE id = ? LIMIT 1" (Only categoryId) :: IO [Category])
     pure $ case categories of
         [category] -> Just category
         _          -> Nothing
@@ -30,7 +30,7 @@ delete categoryId = do
 update ∷ MonadIO m ⇒ Category → ReaderT Env m ()
 update category = do
     conn' <- asks conn
-    liftIO $ execute conn' "UPDATE categories SET name = ? WHERE id = ?" (name category, Category.name category)
+    liftIO $ execute conn' "UPDATE categories SET name = ? WHERE id = ?" (name category, Category.id category)
 
 create ∷ MonadIO m ⇒ CreateCategory → ReaderT Env m Category
 create cj = do
