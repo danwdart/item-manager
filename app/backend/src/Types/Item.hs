@@ -15,7 +15,7 @@ import           Database.SQLite.Simple.FromField
 import           Database.SQLite.Simple.ToField
 import           GHC.Generics
 import           Servant
-
+import Types.Category (CategoryId)
 newtype ItemId = ItemId Int
     deriving
         (FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField, Num) via Int
@@ -26,15 +26,17 @@ newtype ItemName = ItemName Text
 
 data Item = Item {
     id   :: ItemId,
-    name :: ItemName
+    name :: ItemName,
+    categoryId :: CategoryId
 } deriving (Generic, FromJSON, ToJSON)
 
-newtype CreateItem = CreateItem {
-    createItemName :: ItemName
+data CreateItem = CreateItem {
+    createItemName :: ItemName,
+    createItemCategoryId :: CategoryId
 } deriving (Generic, FromJSON, ToJSON)
 
 instance FromRow Item where
-    fromRow = Item <$> field <*> field
+    fromRow = Item <$> field <*> field <*> field
 
 instance ToRow Item where
-    toRow (Item id' name') = toRow (id', name')
+    toRow (Item id' name' categoryId') = toRow (id', name', categoryId')

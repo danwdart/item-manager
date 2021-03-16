@@ -9,6 +9,7 @@ import           Control.Applicative
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.Text                  (Text)
+import DB.Item as DBItem
 import           Database.SQLite.Simple
 import           Servant
 import           Servant.API
@@ -19,44 +20,33 @@ import           Types.Env
 import           Types.Item                  as Item
 
 getAllItemsAPI ∷ App GetAllItemsAPI
-getAllItemsAPI = do
-    conn' <- asks conn
-    liftIO (query_ conn' "SELECT * from items" :: IO [Item])
+getAllItemsAPI = DBItem.getAll
 
 getItemAPI ∷ App GetItemAPI
 getItemAPI itemId = do
-    conn' <- asks conn
-    items <- liftIO (query conn' "SELECT * from items WHERE id = ? LIMIT 1" (Only itemId) :: IO [Item])
+    items <- DBItem.get itemId
     case items of
-        [item] -> pure item
+        Just item -> pure item
         _ -> throwError $ err404 {
             errBody = "Specified item not found"
         }
 
 deleteItemAPI ∷ App DeleteItemAPI
-deleteItemAPI itemId = do
-    conn' <- asks conn
-    liftIO $ execute conn' "DELETE FROM items WHERE id = ?" (Only itemId)
-    pure NoContent
+deleteItemAPI itemId = NoContent <$ DBItem.delete itemId
 
 putItemAPI ∷ App PutItemAPI
 putItemAPI itemId newItem = do
-    conn' <- asks conn
-    items <- liftIO (query conn' "SELECT * from items WHERE id = ? LIMIT 1" (Only itemId) :: IO [Item])
-    case items of
-        [item] -> do
-            liftIO $ execute conn' "UPDATE items SET name = ? WHERE id = ?" (name newItem, itemId)
+    mItem <- DBItem.get itemId
+    case mItem of
+        Just item -> do
+            DBItem.update newItem
             pure newItem
-        _ -> throwError $ err404 {
+        Nothing -> throwError $ err404 {
             errBody = "Specified item not found"
         }
 
 postItemAPI ∷ App PostItemAPI
-postItemAPI cj = do
-    conn' <- asks conn
-    liftIO $ execute conn' "INSERT INTO items (name) VALUES (?)" (Only (createItemName cj))
-    rowId <- liftIO $ lastInsertRowId conn'
-    pure $ Item { Item.name = createItemName cj, Item.id = fromIntegral rowId }
+postItemAPI = DBItem.create
 
 itemsAPI ∷ App ItemsAPI
 itemsAPI = getAllItemsAPI :<|> getItemAPI :<|> deleteItemAPI :<|> putItemAPI :<|> postItemAPI
