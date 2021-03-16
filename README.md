@@ -65,6 +65,36 @@ Then use these to run the development auto-reloading version:
 `docker-compose -f docker-compose.yml up -d` should run everything.
 `docker-compose -f docker-compose.yml build` should make everything from scratch.
 
+## Testing
+
+### Testing using Nix
+
+Assuming the application was built, you can simply run:
+
+`scripts/test.sh`.
+
+You can also live-test parts of the app, like:
+
+`scripts/test-watch frontend`
+
+`scripts/test-watch backend`
+
+`scripts/test-watch common`
+
+### Testing using Docker
+
+At the moment, the best way is probably to just run the tests from one of the apps:
+
+Either:
+
+`docker-compose -f docker-compose.yml run --rm backend scripts/test.sh`
+
+if you installed as in "Installation", or:
+
+`docker-compose run --rm backend scripts/test.sh`
+
+if you installed as in "Development".
+
 ## Considerations
 
 1. The "responsive" option was chosen for time and the fact that Bootstrap has responsive mobile support. But I'll probably still mess around with making the authentication option.
@@ -73,3 +103,5 @@ Then use these to run the development auto-reloading version:
 1. The API can be auto-documented but this has not been done due to time.
 1. The "none" option deliberately exists (but currently is blank) for the category of an item.
 1. A bug exists when you edit a category, the category list is updated but the category names in the item list are not. I'll probably mess around to make that work, but was skipped for time.
+1. Docker could have a docker-compose.admin.yml for tests but this was skipped for time.
+1. The Common library is empty but should be filled with types that the apps share, like `Item` and `Category` - but this was skipped due to time constraints.
