@@ -8,20 +8,22 @@ import Data.Aeson
 import Data.Text
 import GHC.Generics
 
-newtype CreateItem = CreateItem {
-    createItemName :: Text
+data CreateItem = CreateItem {
+    createItemName :: Text,
+    createItemCategoryId :: Int
 } deriving (Generic, ToJSON, Show)
 
 data Item = Item {
     itemId :: Int,
-    name  :: Text
+    name  :: Text,
+    categoryId :: Int
 } deriving (Generic, Show)
 
 instance FromJSON Item where
-    parseJSON (Object o) = Item <$> o .: "id" <*> o .: "name"
+    parseJSON (Object o) = Item <$> o .: "id" <*> o .: "name" <*> o .: "categoryId"
     parseJSON _ = error "Incorrect use of parsing a item"
 
 instance ToJSON Item where
-    toJSON (Item id' name') = object ["id" .= id', "name" .= name']
+    toJSON (Item id' name' categoryId') = object ["id" .= id', "name" .= name', "categoryId" .= categoryId']
 
 type ItemsResponse = [Item]
