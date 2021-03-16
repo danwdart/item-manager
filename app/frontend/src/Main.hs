@@ -25,9 +25,9 @@ import UI.Bootstrap.TabbedNav
 categoryToMap :: [Category] -> Map Text (Map Text Text)
 categoryToMap categories = M.fromList $ fmap mapper categories where
     mapper category = (
-        T.pack . show . categoryId $ category,
+        T.pack . show . Category.categoryId $ category,
         M.fromList [
-          ("id", T.pack . show . categoryId $ category),
+          ("id", T.pack . show . Category.categoryId $ category),
           ("name", Category.name category)
           ]
       )
@@ -59,7 +59,7 @@ widgetItems = mdo
 
   let refreshWhen = switchDyn $ leftmost . (fst . last . snd <$>) . M.elems <$> table
 
-  let editWhen = switchDyn $ leftmost . (snd . (!! 2) . snd <$>) . M.elems <$> table
+  let editWhen = switchDyn $ leftmost . (snd . (!! 3) . snd <$>) . M.elems <$> table
 
   table <- tableDynAttr
     "table table-striped table-bordered table-hover"
@@ -70,6 +70,10 @@ widgetItems = mdo
       ),
       ("Name", \k v -> do
         dynText $ fmap (M.findWithDefault "(none)" "name") v
+        pure (never, never)
+      ),
+      ("Category", \k v -> do
+        dynText $ fmap (M.findWithDefault "(none)" "category") v
         pure (never, never)
       ),
       ("", \k v -> do
@@ -104,8 +108,10 @@ widgetItems = mdo
               inputElement $ def & inputElementConfig_elementConfig . elementConfig_initialAttributes .~ [("id", "name"), ("class", "form-control"), ("placeholder", "Bob")]
         divClass "modal-footer" $ do
           evtSaveAddModal <- bsButton "btn btn-primary" "Save"
-          let dynItem = _inputElement_value elItem
-          evtCreate <- createItem $ tagPromptlyDyn dynItem evtSaveAddModal
+          let dynItemName = _inputElement_value elItem
+          let dynCategoryId = pure 0
+          let dynCreateItem = CreateItem <$> dynItemName <*> dynCategoryId
+          evtCreate <- createItem $ tagPromptlyDyn dynCreateItem evtSaveAddModal
           evtCloseModal <- bsButton "btn btn-secondary" "Cancel"
           pure $ leftmost [
               void evtCreate,
@@ -123,7 +129,7 @@ widgetItems = mdo
         divClass "modal-header" .
           elClass "h5" "modal-title" $
             text "Edit"
-        (dynItemId, dynItemName) <- divClass "modal-body" .
+        (dynItemId, dynItemName, dynItemCategoryId) <- divClass "modal-body" .
           el "form" .
             divClass "form-group" $ mdo
               elAttr "label" [("for", "name")] $ text "Name"
@@ -131,6 +137,7 @@ widgetItems = mdo
               let evtGrabbedItem = maybe "" Item.name <$> evtGetItem
               let evtItemId = maybe 0 itemId <$> evtGetItem
               dynItemName <- holdDyn "" evtGrabbedItem
+              let dynItemCategoryId = pure 0
               dynItemId <- holdDyn 0 evtItemId
               inputItem <- inputElement $ def &
                 inputElementConfig_elementConfig . elementConfig_initialAttributes .~ [
@@ -139,14 +146,16 @@ widgetItems = mdo
                   ("placeholder", "Bob's Item")
                   ] &
                 inputElementConfig_setValue .~ updated dynItemName
-              let dynItem = _inputElement_value inputItem
-              pure (dynItemId, dynItem)
+              let dynItemNameText = _inputElement_value inputItem
+              pure (dynItemId, dynItemNameText, dynItemCategoryId)
         divClass "modal-footer" $ do
           evtSaveModal <- bsButton "btn btn-primary" "Save"
           let dynItem = Item <$>
                 dynItemId
                 <*>
                 dynItemName
+                <*>
+                dynItemCategoryId
           let evItem = tagPromptlyDyn dynItem evtSaveModal
           evtModify <- modifyItem evItem
           evtCloseModal <- bsButton "btn btn-secondary" "Cancel"
@@ -243,7 +252,7 @@ widgetCategories = mdo
               elAttr "label" [("for", "name")] $ text "Name"
               evtGetCategory <- getCategory (read . T.unpack <$> editWhen)
               let evtGrabbedCategory = maybe "" Category.name <$> evtGetCategory
-              let evtCategoryId = maybe 0 categoryId <$> evtGetCategory
+              let evtCategoryId = maybe 0 Category.categoryId <$> evtGetCategory
               dynCategoryName <- holdDyn "" evtGrabbedCategory
               dynCategoryId <- holdDyn 0 evtCategoryId
               inputCategory <- inputElement $ def &

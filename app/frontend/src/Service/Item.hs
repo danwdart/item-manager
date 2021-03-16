@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveAnyClass    #-}
-{-# LANGUAGE DeriveGeneric     #-}
+
+
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -29,14 +29,14 @@ apiEndpoint = "http://localhost:8081/api"
 -- Widget, really??
 
 getAllItems ∷ MonadWidget t m ⇒ Event t () → m (Event t ItemsResponse)
-getAllItems e = fmap (fromMaybe [Item 0 "Cannot fetch results"]) <$> getAndDecode ((apiEndpoint <> "/items") <$ e)
+getAllItems e = fmap (fromMaybe [Item 0 "Cannot fetch results" 0]) <$> getAndDecode (apiEndpoint <> "/items" <$ e)
 
 getItem ∷ MonadWidget t m ⇒ Event t Int → m (Event t (Maybe Item))
 getItem e = getAndDecode ((\itemId' -> apiEndpoint <> "/items/" <> T.pack (show itemId')) <$> e)
 
-createItem ∷ MonadWidget t m ⇒ Event t Text → m (Event t (Maybe Item))
-createItem e = fmap decodeXhrResponse <$> performRequestAsync (
-    postJson (apiEndpoint <> "/items") . CreateItem <$> e
+createItem ∷ MonadWidget t m ⇒ Event t CreateItem -> m (Event t (Maybe Item))
+createItem createItemData = fmap decodeXhrResponse <$> performRequestAsync (
+    postJson (apiEndpoint <> "/items") <$> createItemData
     )
 
 deleteItem ∷ MonadWidget t m ⇒ Event t Int → m (Event t (Maybe ()))
