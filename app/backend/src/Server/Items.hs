@@ -40,13 +40,13 @@ deleteItemAPI itemId = do
     pure NoContent
 
 putItemAPI ∷ App PutItemAPI
-putItemAPI itemId item = do
+putItemAPI itemId newItem = do
     conn' <- asks conn
     items <- liftIO (query conn' "SELECT * from items WHERE id = ? LIMIT 1" (Only itemId) :: IO [Item])
     case items of
         [item] -> do
-            liftIO $ execute conn' "UPDATE items SET name = ? WHERE id = ?" (name item, itemId)
-            pure item
+            liftIO $ execute conn' "UPDATE items SET name = ? WHERE id = ?" (name newItem, itemId)
+            pure newItem
         _ -> throwError $ err404 {
             errBody = "Specified item not found"
         }
