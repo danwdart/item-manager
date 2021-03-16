@@ -59,7 +59,7 @@ widgetItems = mdo
 
   eGetItems <- getAllItems $ leftmost [epb, evCloseAddModal, evCloseEditModal, refreshWhen]
 
-  eGetCategories <- getAllCategories $ leftmost [epb, addItem, void editWhen]
+  eGetCategories <- getAllCategories $ leftmost [epb, addItem, void editWhen, refreshWhen]
 
   dynCategories <- holdDyn [] $ categoriesToSelect <$> eGetCategories
 
