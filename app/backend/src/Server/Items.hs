@@ -9,15 +9,15 @@ import           Control.Applicative
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
 import           Data.Text                  (Text)
-import DB.Item as DBItem
 import           Database.SQLite.Simple
+import           DB.Item                    as DBItem
 import           Servant
 import           Servant.API
 import           Types.API.API
 import           Types.API.Items
 import           Types.App
 import           Types.Env
-import           Types.Item                  as Item
+import           Types.Item                 as Item
 
 getAllItemsAPI ∷ App GetAllItemsAPI
 getAllItemsAPI = DBItem.getAll

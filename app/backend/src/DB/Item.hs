@@ -12,12 +12,12 @@ import           Types.Item                 as Item
 getAll ∷ MonadIO m ⇒ ReaderT Env m [Item]
 getAll = do
     conn' <- asks conn
-    liftIO $ query_ conn' "SELECT * from items"
+    liftIO $ query_ conn' "SELECT id, name, categoryId from items"
 
 get ∷ MonadIO m ⇒ ItemId → ReaderT Env m (Maybe Item)
 get itemId = do
     conn' <- asks conn
-    items <- liftIO (query conn' "SELECT * from items WHERE id = ? LIMIT 1" (Only itemId) :: IO [Item])
+    items <- liftIO (query conn' "SELECT id, name, categoryId from items WHERE id = ? LIMIT 1" (Only itemId) :: IO [Item])
     pure $ case items of
         [item] -> Just item
         _      -> Nothing
