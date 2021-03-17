@@ -16,4 +16,6 @@ RUN git submodule update --init --recursive
 
 RUN nix-build -o result/backend -A ghc.backend
 
-CMD [ "result/backend/bin/backend" ]
+WORKDIR /app/app/backend
+
+CMD [ "../../result/backend/bin/backend" ]
