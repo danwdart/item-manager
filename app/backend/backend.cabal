@@ -11,8 +11,7 @@ extra-source-files:  CHANGELOG.md
 
 executable backend
   main-is:             Main.hs
-  other-modules:       Server.Categories
-                     , Server.Items
+  other-modules:       Server.Items
                      , Server.Server
                      , Types.API.API
                      , Types.API.Categories
@@ -44,6 +43,7 @@ test-suite backend-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:       
     base >= 4.7 && < 5
+    , aeson
     , hspec
     , hspec-core
     , hspec-expectations
@@ -53,3 +53,21 @@ test-suite backend-test
     , quickcheck-instances
     , servant-client
     , servant-quickcheck
+    , servant-server
+    , sqlite-simple
+    , text
+  other-modules:       DB.Category
+                     , DB.Item
+                     , MainSpec
+                     , Server.Categories
+                     , Server.Items
+                     , Server.Server
+                     , Types.API.API
+                     , Types.API.Categories
+                     , Types.API.Items
+                     , Types.App
+                     , Types.Category
+                     , Types.CategorySpec
+                     , Types.Env
+                     , Types.Item
+                     , Types.ItemSpec
