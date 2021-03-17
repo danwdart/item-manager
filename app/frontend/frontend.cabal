@@ -32,11 +32,20 @@ test-suite frontend-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:       
     base >= 4.7 && < 5
+    , aeson
     , common
     , hspec
     , hspec-core
     , hspec-expectations
     , HUnit
     , QuickCheck
-  other-modules:
-    MainSpec
+    , text
+  other-modules:       MainSpec
+                     , Service.Category
+                     , Service.Item
+                     , Types.Category
+                     , Types.CategorySpec
+                     , Types.Item
+                     , Types.ItemSpec
+                     , UI.Bootstrap.Button
+                     , UI.Bootstrap.TabbedNav
