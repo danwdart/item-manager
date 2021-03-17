@@ -51,11 +51,13 @@ test-suite backend-test
     , HUnit
     , QuickCheck
     , quickcheck-instances
+    , servant
     , servant-client
     , servant-quickcheck
     , servant-server
     , sqlite-simple
     , text
+    , transformers
   other-modules:       DB.Category
                      , DB.Item
                      , MainSpec
