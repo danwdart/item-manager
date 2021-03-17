@@ -112,3 +112,17 @@ if you installed as in "Development".
 1. The environment is hardcoded but could be pulled - time restrictions applied again.
 1. Again, the frontend Main file is fairly chunky and should be split down.
 1. We can simply make Android apps with Reflex!
+
+## Questions
+
+1. Spent time was on the order of 3 hours in total.
+1. I couldnt cover everything I wanted to in that time.
+1. Above I noted what I would add to my solution if I had more time.
+1. I would choose these technologies if this were to become a reliable enterprise system, and probably deploy it to serverless / static page servers for cheap cost.
+
+## Feedback
+
+1. I thought it was quite standard of an exercise but I did enjoy the freedom it gave me to explore technologies.
+1. This was enjoyable to develop and to learn more about the technologies I like.
+1. I believe it was fair for some languages but not others - depends how much testing you'd have done in that time.
+1. I think it could be improved with a bit more "spend this much time on X, spend this much time on testing X".
