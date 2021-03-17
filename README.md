@@ -106,3 +106,6 @@ if you installed as in "Development".
 1. Docker could have a docker-compose.admin.yml for tests but this was skipped for time.
 1. The Common library is empty but should be filled with types that the apps share, like `Item` and `Category` - but this was skipped due to time constraints.
 1. Backend could be modelled but at the moment is just plain old quickchecked using `servant-quickcheck`.
+1. I should have used `servant-reflex`.
+1. There are only type tests on frontend, I could've used certain things like reflex testing stuff or Selenium but that was skipped due to time.
+1. I know that commits are badly named - this isn't usually a problem when using tickets
