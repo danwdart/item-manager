@@ -13,7 +13,12 @@ data-dir:            data
 
 executable frontend
   main-is:             Main.hs
-  other-modules:       Service.Item
+  other-modules:       Service.Category
+                     , Service.Item
+                     , Types.Category
+                     , Types.Item
+                     , UI.Bootstrap.Button
+                     , UI.Bootstrap.TabbedNav
   -- other-extensions:
   build-depends:       base >=4.12 && <4.16, aeson, bytestring, common, containers, reflex-dom, text
   hs-source-dirs:      src

@@ -110,4 +110,5 @@ if you installed as in "Development".
 1. There are only type tests on frontend, I could've used certain things like reflex testing stuff or Selenium but that was skipped due to time.
 1. I know that commits are badly named - this isn't usually a problem when using tickets
 1. The environment is hardcoded but could be pulled - time restrictions applied again.
+1. Again, the frontend Main file is fairly chunky and should be split down.
 1. We can simply make Android apps with Reflex!
