@@ -1,0 +1,33 @@
+{-# LANGUAGE UnicodeSyntax #-}
+module Types.ItemSpec where
+
+import           Data.Aeson
+import           Test.Hspec                     (HasCallStack, Spec, describe,
+                                                 it, parallel, runIO, shouldBe,
+                                                 shouldSatisfy, xdescribe)
+import           Test.Hspec.Expectations        (shouldNotBe, shouldNotContain)
+import           Test.QuickCheck
+import           Test.QuickCheck.Instances.Text
+import           Types.Item
+import           Types.Category as Category
+
+instance Arbitrary CategoryId where
+    arbitrary = CategoryId <$> arbitrary
+
+instance Arbitrary ItemId where
+    arbitrary = ItemId <$> arbitrary
+
+instance Arbitrary ItemName where
+    arbitrary = ItemName <$> arbitrary
+
+instance Arbitrary Item where
+    arbitrary = Item <$> arbitrary <*> arbitrary <*> arbitrary
+
+propSerialiseUnserialise ∷ Item → Property
+propSerialiseUnserialise item =
+    decode (encode item) === Just item
+
+spec ∷ Spec
+spec = describe "Item" .
+    it "serialises to JSON and unserialises" $
+        quickCheck propSerialiseUnserialise

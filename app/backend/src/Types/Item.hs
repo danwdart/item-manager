@@ -18,17 +18,17 @@ import           Servant
 import           Types.Category                   (CategoryId)
 newtype ItemId = ItemId Int
     deriving
-        (FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField, Num) via Int
+        (Show, Eq, FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField, Num) via Int
 
 newtype ItemName = ItemName Text
     deriving
-        (FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField) via Text
+        (Show, Eq, FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField) via Text
 
 data Item = Item {
     id         :: ItemId,
     name       :: ItemName,
     categoryId :: CategoryId
-} deriving (Generic, FromJSON, ToJSON)
+} deriving (Show, Eq, Generic, FromJSON, ToJSON)
 
 data CreateItem = CreateItem {
     createItemName       :: ItemName,

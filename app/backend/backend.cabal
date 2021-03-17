@@ -49,7 +49,6 @@ test-suite backend-test
     , hspec-wai
     , HUnit
     , QuickCheck
+    , quickcheck-instances
     , servant-client
     , servant-quickcheck
-  other-modules:
-    MainSpec
