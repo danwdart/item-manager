@@ -18,16 +18,16 @@ import           Servant
 
 newtype CategoryId = CategoryId Int
     deriving
-        (FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField, Num) via Int
+        (Eq, Show, FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField, Num) via Int
 
 newtype CategoryName = CategoryName Text
     deriving
-        (FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField) via Text
+        (Eq, Show, FromHttpApiData, ToHttpApiData, FromJSON, ToJSON, FromField, ToField) via Text
 
 data Category = Category {
     id   :: CategoryId,
     name :: CategoryName
-} deriving (Generic, FromJSON, ToJSON)
+} deriving (Eq, Generic, FromJSON, ToJSON, Show)
 
 newtype CreateCategory = CreateCategory {
     createCategoryName :: CategoryName
