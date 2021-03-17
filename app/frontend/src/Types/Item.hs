@@ -17,7 +17,7 @@ data Item = Item {
     itemId :: Int,
     name  :: Text,
     categoryId :: Int
-} deriving (Generic, Show)
+} deriving (Generic, Show, Eq)
 
 instance FromJSON Item where
     parseJSON (Object o) = Item <$> o .: "id" <*> o .: "name" <*> o .: "categoryId"

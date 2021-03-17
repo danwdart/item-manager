@@ -15,7 +15,7 @@ newtype CreateCategory = CreateCategory {
 data Category = Category {
     categoryId :: Int,
     name  :: Text
-} deriving (Generic, Show)
+} deriving (Generic, Show, Eq)
 
 instance FromJSON Category where
     parseJSON (Object o) = Category <$> o .: "id" <*> o .: "name"
