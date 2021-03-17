@@ -44,6 +44,7 @@ test-suite backend-test
   build-depends:       
     base >= 4.7 && < 5
     , aeson
+    , directory
     , hspec
     , hspec-core
     , hspec-expectations
