@@ -105,3 +105,4 @@ if you installed as in "Development".
 1. A bug exists when you edit a category, the category list is updated but the category names in the item list are not. I'll probably mess around to make that work, but was skipped for time.
 1. Docker could have a docker-compose.admin.yml for tests but this was skipped for time.
 1. The Common library is empty but should be filled with types that the apps share, like `Item` and `Category` - but this was skipped due to time constraints.
+1. Backend could be modelled but at the moment is just plain old quickchecked using `servant-quickcheck`.
