@@ -94,35 +94,3 @@ if you installed as in "Installation", or:
 `docker-compose run --rm backend scripts/test.sh`
 
 if you installed as in "Development".
-
-## Considerations
-
-1. The "responsive" option was chosen for time and the fact that Bootstrap has responsive mobile support. But I'll probably still mess around with making the authentication option.
-1. There is no validation currently which was skipped due to time. You can enter blanks anywhere you want at the moment.
-1. This is currently hosted in a private GitHub repository. It would be nice to make it public soon.
-1. The API can be auto-documented but this has not been done due to time.
-1. The "none" option deliberately exists (but currently is blank) for the category of an item.
-1. A bug exists when you edit a category, the category list is updated but the category names in the item list are not. I'll probably mess around to make that work, but was skipped for time.
-1. Docker could have a docker-compose.admin.yml for tests but this was skipped for time.
-1. The Common library is empty but should be filled with types that the apps share, like `Item` and `Category` - but this was skipped due to time constraints.
-1. Backend could be modelled but at the moment is just plain old quickchecked using `servant-quickcheck`.
-1. I should have used `servant-reflex`.
-1. There are only type tests on frontend, I could've used certain things like reflex testing stuff or Selenium but that was skipped due to time.
-1. I know that commits are badly named - this isn't usually a problem when using tickets
-1. The environment is hardcoded but could be pulled - time restrictions applied again.
-1. Again, the frontend Main file is fairly chunky and should be split down.
-1. We can simply make Android apps with Reflex!
-
-## Questions
-
-1. Spent time was on the order of 3 hours in total.
-1. I couldnt cover everything I wanted to in that time.
-1. Above I noted what I would add to my solution if I had more time.
-1. I would choose these technologies if this were to become a reliable enterprise system, and probably deploy it to serverless / static page servers for cheap cost.
-
-## Feedback
-
-1. I thought it was quite standard of an exercise but I did enjoy the freedom it gave me to explore technologies.
-1. This was enjoyable to develop and to learn more about the technologies I like.
-1. I believe it was fair for some languages but not others - depends how much testing you'd have done in that time.
-1. I think it could be improved with a bit more "spend this much time on X, spend this much time on testing X".
