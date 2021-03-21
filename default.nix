@@ -1,4 +1,4 @@
-{ system ? builtins.currentSystem, nixpkgs ? import <nixpkgs> {} }:
+{ system ? builtins.currentSystem, nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs/archive/master.tar.gz) {} }:
 (import ./external/reflex-platform {
   inherit system;
   config.android_sdk.accept_license = true;  
