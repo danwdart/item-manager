@@ -1,4 +1,4 @@
-{ system ? builtins.currentSystem, nixpkgs ? import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz) {} }:
+{ system ? builtins.currentSystem, nixpkgs ? import <unstable> {} }:
 (import ./external/reflex-platform {
   inherit system;
   config.android_sdk.accept_license = true;  
