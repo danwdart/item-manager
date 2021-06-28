@@ -1,28 +1,28 @@
-{-# LANGUAGE MonoLocalBinds #-}
-{-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE MonoLocalBinds    #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecursiveDo #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE UnicodeSyntax #-}
+{-# LANGUAGE RecursiveDo       #-}
+{-# LANGUAGE TypeApplications  #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Main where
 
-import Control.Monad (void)
-import Data.Map (Map)
-import qualified Data.Map as M
-import Data.Set (Set)
-import qualified Data.Set as S
-import Data.Text (Text)
-import qualified Data.Text as T
-import Reflex.Dom
-import Service.Category
-import Service.Item
-import Types.Category as Category
-import Types.Item as Item
-import UI.Bootstrap.Button
-import UI.Bootstrap.TabbedNav
+import           Control.Monad          (void)
+import           Data.Map               (Map)
+import qualified Data.Map               as M
+import           Data.Set               (Set)
+import qualified Data.Set               as S
+import           Data.Text              (Text)
+import qualified Data.Text              as T
+import           Reflex.Dom
+import           Service.Category
+import           Service.Item
+import           Types.Category         as Category
+import           Types.Item             as Item
+import           UI.Bootstrap.Button
+import           UI.Bootstrap.TabbedNav
 
-categoryToMap :: [Category] -> Map Text (Map Text Text)
+categoryToMap ∷ [Category] → Map Text (Map Text Text)
 categoryToMap categories = M.fromList $ fmap mapper categories
   where
     mapper category =
@@ -33,7 +33,7 @@ categoryToMap categories = M.fromList $ fmap mapper categories
           ]
       )
 
-categoriesToSelect :: [Category] -> Map Int Text
+categoriesToSelect ∷ [Category] → Map Int Text
 categoriesToSelect categories = M.fromList $ fmap mapper categories
   where
     mapper category =
@@ -41,7 +41,7 @@ categoriesToSelect categories = M.fromList $ fmap mapper categories
         Category.name category
       )
 
-itemToMap :: [Item] -> Map Text (Map Text Text)
+itemToMap ∷ [Item] → Map Text (Map Text Text)
 itemToMap categories = M.fromList $ fmap mapper categories
   where
     mapper item =
@@ -53,7 +53,7 @@ itemToMap categories = M.fromList $ fmap mapper categories
           ]
       )
 
-widgetItems :: (MonadWidget t m) => m ()
+widgetItems ∷ (MonadWidget t m) ⇒ m ()
 widgetItems = mdo
   epb <- getPostBuild
 
@@ -220,7 +220,7 @@ widgetItems = mdo
             ]
   pure ()
 
-widgetCategories :: (MonadWidget t m) => m ()
+widgetCategories ∷ (MonadWidget t m) ⇒ m ()
 widgetCategories = mdo
   epb <- getPostBuild
 
@@ -355,7 +355,7 @@ widgetCategories = mdo
 
   pure ()
 
-widget :: (MonadWidget t m) => m ()
+widget ∷ (MonadWidget t m) ⇒ m ()
 widget =
   divClass "container-fluid" $
     bsTabbedNav
@@ -365,7 +365,7 @@ widget =
         ("categories", "Categories", widgetCategories)
       ]
 
-main :: IO ()
+main ∷ IO ()
 main =
   mainWidgetWithHead
     ( do

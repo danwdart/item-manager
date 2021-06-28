@@ -10,7 +10,7 @@ import           Test.QuickCheck
 import           Test.QuickCheck.Instances.Text
 import           Types.Category                 as Category
 import           Types.CategorySpec             hiding
-                                                 (propSerialiseUnserialise)
+                                                (propSerialiseUnserialise)
 import           Types.Item
 
 instance Arbitrary ItemId where

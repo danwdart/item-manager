@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeOperators     #-}
+
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Server.Items where
@@ -8,9 +8,9 @@ module Server.Items where
 import           Control.Applicative
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
+import           DB.Item                    as DBItem
 import           Data.Text                  (Text)
 import           Database.SQLite.Simple
-import           DB.Item                    as DBItem
 import           Servant
 import           Servant.API
 import           Types.API.API

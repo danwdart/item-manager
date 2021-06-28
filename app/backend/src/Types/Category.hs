@@ -3,7 +3,7 @@
 {-# LANGUAGE DeriveGeneric  #-}
 {-# LANGUAGE DerivingVia    #-}
 
-{-# LANGUAGE TypeOperators  #-}
+
 {-# LANGUAGE UnicodeSyntax  #-}
 
 module Types.Category where

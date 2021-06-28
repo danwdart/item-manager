@@ -1,14 +1,15 @@
-{-# LANGUAGE MonoLocalBinds #-}
-{-# LANGUAGE OverloadedLists #-}
+{-# LANGUAGE MonoLocalBinds    #-}
+{-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecursiveDo #-}
+{-# LANGUAGE RecursiveDo       #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module UI.Bootstrap.TabbedNav where
 
-import Data.Text
-import Reflex.Dom
+import           Data.Text
+import           Reflex.Dom
 
-bsTabbedNav :: (MonadWidget t m, Eq a, Semigroup a) => Text -> a -> [(a, Text, m ())] -> m ()
+bsTabbedNav ∷ (MonadWidget t m, Eq a, Semigroup a) ⇒ Text → a -> [(a, Text, m ())] -> m ()
 bsTabbedNav theTitle defaultVal items = mdo
     dNav <- holdDyn defaultVal eNavClick
     eNavClick <- divClass "navbar-collapse" .

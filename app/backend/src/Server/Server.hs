@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeOperators     #-}
+
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Server.Server where

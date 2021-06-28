@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveAnyClass    #-}
-{-# LANGUAGE DeriveGeneric     #-}
+
+
 {-# LANGUAGE OverloadedLists   #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE UnicodeSyntax     #-}
@@ -21,7 +21,7 @@ import           GHC.Generics
 import           Reflex.Dom
 import           Reflex.Dom.Xhr
 
-import Types.Category
+import           Types.Category
 
 apiEndpoint ∷ Text
 apiEndpoint = "http://localhost:8081/api"

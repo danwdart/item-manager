@@ -34,7 +34,7 @@ getAllItems e = fmap (fromMaybe [Item 0 "Cannot fetch results" 0]) <$> getAndDec
 getItem ∷ MonadWidget t m ⇒ Event t Int → m (Event t (Maybe Item))
 getItem e = getAndDecode ((\itemId' -> apiEndpoint <> "/items/" <> T.pack (show itemId')) <$> e)
 
-createItem ∷ MonadWidget t m ⇒ Event t CreateItem -> m (Event t (Maybe Item))
+createItem ∷ MonadWidget t m ⇒ Event t CreateItem → m (Event t (Maybe Item))
 createItem createItemData = fmap decodeXhrResponse <$> performRequestAsync (
     postJson (apiEndpoint <> "/items") <$> createItemData
     )

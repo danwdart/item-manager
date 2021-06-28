@@ -1,21 +1,22 @@
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DeriveAnyClass    #-}
+{-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE UnicodeSyntax     #-}
 
 module Types.Item where
 
-import Data.Aeson
-import Data.Text
-import GHC.Generics
+import           Data.Aeson
+import           Data.Text
+import           GHC.Generics
 
 data CreateItem = CreateItem {
-    createItemName :: Text,
+    createItemName       :: Text,
     createItemCategoryId :: Int
 } deriving (Generic, ToJSON, Show)
 
 data Item = Item {
-    itemId :: Int,
-    name  :: Text,
+    itemId     :: Int,
+    name       :: Text,
     categoryId :: Int
 } deriving (Generic, Show, Eq)
 

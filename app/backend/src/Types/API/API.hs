@@ -9,7 +9,7 @@
 module Types.API.API where
 
 import           Data.Aeson
-import           Data.Text           (Text)
+import           Data.Text            (Text)
 import           GHC.Generics
 import           Servant
 import           Servant.API

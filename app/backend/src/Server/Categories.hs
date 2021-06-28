@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeOperators     #-}
+
 {-# LANGUAGE UnicodeSyntax     #-}
 
 module Server.Categories where
@@ -8,9 +8,9 @@ module Server.Categories where
 import           Control.Applicative
 import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Reader
+import           DB.Category                as DBCategory
 import           Data.Text                  (Text)
 import           Database.SQLite.Simple
-import           DB.Category                as DBCategory
 import           Servant
 import           Servant.API
 import           Types.API.API
