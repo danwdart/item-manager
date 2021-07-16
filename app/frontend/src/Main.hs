@@ -14,6 +14,7 @@ import           Data.Set               (Set)
 import qualified Data.Set               as S
 import           Data.Text              (Text)
 import qualified Data.Text              as T
+import           Data.Text.Show
 import           Reflex.Dom
 import           Service.Category
 import           Service.Item
@@ -26,9 +27,9 @@ categoryToMap ∷ [Category] → Map Text (Map Text Text)
 categoryToMap categories = M.fromList $ fmap mapper categories
   where
     mapper category =
-      ( T.pack . show . Category.categoryId $ category,
+      ( tshow . Category.categoryId $ category,
         M.fromList
-          [ ("id", T.pack . show . Category.categoryId $ category),
+          [ ("id", tshow . Category.categoryId $ category),
             ("name", Category.name category)
           ]
       )
@@ -45,11 +46,11 @@ itemToMap ∷ [Item] → Map Text (Map Text Text)
 itemToMap categories = M.fromList $ fmap mapper categories
   where
     mapper item =
-      ( T.pack . show . itemId $ item,
+      ( tshow . itemId $ item,
         M.fromList
-          [ ("id", T.pack . show . itemId $ item),
+          [ ("id", tshow . itemId $ item),
             ("name", Item.name item),
-            ("categoryId", T.pack . show $ Item.categoryId item)
+            ("categoryId", tshow $ Item.categoryId item)
           ]
       )
 
